@@ -1,5 +1,16 @@
 package it.fides.fatture.parsing.reading;
 
-public class TextReader {
+import it.fides.fatture.parsing.datacontainers.Header;
 
+
+public class TextReader {
+	
+private Header head = new Header();
+	
+	public void read() {
+		
+		
+		
+	}
+	
 }
