@@ -17,7 +17,5 @@ public class Footer {
 	public void setBankId(String bankId) {
 		this.bankId = bankId;
 	}
-	
 
-	
 }

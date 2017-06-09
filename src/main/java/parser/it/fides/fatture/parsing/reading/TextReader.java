@@ -13,11 +13,14 @@ import java.util.*;
 
 import it.fides.fatture.parsing.datacontainers.Header;
 import it.fides.fatture.parsing.datacontainers.Body;
+import it.fides.fatture.parsing.datacontainers.Footer;
 
 public class TextReader {
 	
 static Header head = new Header();	
 static Body corpo = new Body();
+static Footer foot = new Footer();
+
 private static Scanner input;
 
 public static void main(String[] args) throws FileNotFoundException {
@@ -119,7 +122,26 @@ public static void main(String[] args) throws FileNotFoundException {
 				firstBodyPart++;
 
 			}
-					
+			
+		     if(nextLine.trim().contains("IMPONIBILE   IVA")) {
+		          //Hack to check the next line that is empty
+		         if(input.nextLine().trim().isEmpty()) {
+		       	
+		           System.out.println(input.nextLine());
+		  
+		        }
+
+		     }
+		      
+		     if(nextLine.contains("MOD.PAG.")) {
+		        
+		        	System.out.println(nextLine);
+		          foot.setBankId(nextLine);
+		          System.out.println(input.nextLine());
+		          foot.setMethodOfPayment(nextLine);
+		        
+		        }
+	
 		}
 		
 	}
