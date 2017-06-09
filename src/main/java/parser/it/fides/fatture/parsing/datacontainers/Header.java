@@ -6,6 +6,7 @@ public class Header {
 	private String secondLine = new String();
 	private String thirdLine = new String();
 	private String forthLine = new String();
+	private String fifthLine = new String();
 	
 	public String getFirstLine() {
 		
@@ -54,4 +55,17 @@ public class Header {
 		this.forthLine = forthLine;
 	
 	}
+	
+	public String getFifthLine() {
+		
+		return fifthLine;
+	
+	}
+
+	public void setFifthLine(String fifthLine) {
+	
+		this.fifthLine = fifthLine;
+	
+	}
 }
+

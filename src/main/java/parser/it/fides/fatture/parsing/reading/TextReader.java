@@ -31,14 +31,16 @@ public static void main(String[] args) throws FileNotFoundException {
 		File file = new File("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
 		input = new Scanner(file);
 		int iHead = 0;
+		Boolean readyToReadBody = false;
 		int firstBodyPart = 0;
+		int lineNumber = 0;
 		
 		while(input.hasNext()) {
-			
-			//String next = input.next();
+ System.out.println(lineNumber);
+ lineNumber++;
 			String nextLine = input.nextLine();
 			//inizio della lettura e del reporting del head
-			if(iHead <8) {
+			if(iHead < 9) {
 				
 				switch (iHead) {
 			
@@ -58,48 +60,68 @@ public static void main(String[] args) throws FileNotFoundException {
 					head.setForthLine(nextLine);
 					System.out.println(nextLine);
 					break;
+				case 8:
+					head.setFifthLine(nextLine);
+					System.out.println(nextLine);
+					readyToReadBody = true;
+	
 				default:
 				break;
 			}
 			
 			iHead++;
+			
+			
 			//System.out.println(iHead);
 			
-			} else {
+			} 
+			//System.out.println(firstBodyPart);
+			if(readyToReadBody) {
 				
-				//analisi del corpo della fattura
 				switch (firstBodyPart) {
-				case 0:
-					
+				
+				case 3:
+
 						String wordtoFind = "DEL";
 						Pattern word = Pattern.compile(wordtoFind);
 					    Matcher match = word.matcher(nextLine);
+					    String thisLine = nextLine;
+					    
 					    while(match.find()){
 					    	
-						    String first = nextLine.substring(12, match.start());
-						    String second = nextLine.substring(match.start() + 3);
+						    String first = thisLine.substring(12, match.start());
+						    String second = thisLine.substring(match.start() + 3);
 							
 						    System.out.println(first.trim());
 						    corpo.setBillFirstId(first);
 						    System.out.println(second.trim());
 						    corpo.setBillDateOfIssue(second);
-						    
+						        
 					    }
 
-					    
+					break;
+					
+				case 4:
+						
+					String billDueDate = input.nextLine().substring(8);
+					corpo.setBillDueDate(billDueDate.trim());
+					System.out.println(billDueDate.trim());
 					
 					break;
-
+					
+				case 5: 
+					
 				default:
 					break;
+					
 				}
 				
-				
-				
+				firstBodyPart++;
+
 			}
-			
+					
 		}
-	
+		
 	}
 	
 }

@@ -1,10 +1,13 @@
 package it.fides.fatture.parsing.datacontainers;
 
+import java.util.ArrayList;
+
 public class Body {
 	private String billFirstId = new String();
 	private String billDateOfIssue = new String();
 	private String billDueDate = new String();
 	private String billSecondId = new String();
+	//private ArrayList<Object>
 	
 	public String getBillFirstId() {
 		return billFirstId;
