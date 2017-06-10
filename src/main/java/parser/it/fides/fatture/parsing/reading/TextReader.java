@@ -1,17 +1,13 @@
 package it.fides.fatture.parsing.reading;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.*;
 
 import it.fides.fatture.parsing.datacontainers.Header;
+import it.fides.fatture.parsing.datacontainers.TableData;
 import it.fides.fatture.parsing.datacontainers.Body;
 import it.fides.fatture.parsing.datacontainers.Footer;
 
@@ -20,6 +16,7 @@ public class TextReader {
 static Header head = new Header();	
 static Body corpo = new Body();
 static Footer foot = new Footer();
+static TableData tabella = new TableData();
 
 private static Scanner input;
 
@@ -36,11 +33,12 @@ public static void main(String[] args) throws FileNotFoundException {
 		int iHead = 0;
 		Boolean readyToReadBody = false;
 		int firstBodyPart = 0;
+		Boolean readyToReadTheTable = false;
 		int lineNumber = 0;
 		
 		while(input.hasNext()) {
- System.out.println(lineNumber);
- lineNumber++;
+			System.out.println(lineNumber);
+			lineNumber++;
 			String nextLine = input.nextLine();
 			//inizio della lettura e del reporting del head
 			if(iHead < 9) {
@@ -70,12 +68,10 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 				default:
 				break;
-			}
+				
+				}
 			
 			iHead++;
-			
-			
-			//System.out.println(iHead);
 			
 			} 
 			//System.out.println(firstBodyPart);
@@ -85,22 +81,20 @@ public static void main(String[] args) throws FileNotFoundException {
 				
 				case 3:
 
-						String wordtoFind = "DEL";
-						Pattern word = Pattern.compile(wordtoFind);
-					    Matcher match = word.matcher(nextLine);
-					    String thisLine = nextLine;
+					String wordtoFind = "DEL";
+					Pattern word = Pattern.compile(wordtoFind);
+					Matcher match = word.matcher(nextLine);
 					    
-					    while(match.find()){
+				    while(match.find()){
 					    	
-						    String first = thisLine.substring(12, match.start());
-						    String second = thisLine.substring(match.start() + 3);
-							
-						    System.out.println(first.trim());
-						    corpo.setBillFirstId(first);
-						    System.out.println(second.trim());
-						    corpo.setBillDateOfIssue(second);
+					    String first = nextLine.substring(12, match.start());
+					    String second = nextLine.substring(match.start() + 3);    
+					    System.out.println(first.trim());
+					    corpo.setBillFirstId(first);
+					    System.out.println(second.trim());
+					    corpo.setBillDateOfIssue(second);
 						        
-					    }
+				    }
 
 					break;
 					
@@ -114,6 +108,10 @@ public static void main(String[] args) throws FileNotFoundException {
 					
 				case 5: 
 					
+					corpo.setBillSecondId(nextLine);
+					System.out.println(nextLine);
+					readyToReadBody = false;
+					
 				default:
 					break;
 					
@@ -123,25 +121,42 @@ public static void main(String[] args) throws FileNotFoundException {
 
 			}
 			
+			
+			if(lineNumber > 19 ){
+				
+				String qta = nextLine.substring(0, 8).trim();
+				if(qta.contains(",")){
+					
+					qta.replace(',', '.');
+					System.out.println(qta.indexOf(','));
+					
+				}
+				//Integer qtaIntero = Integer.valueOf(qta);
+				System.out.println(qta);
+				
+				
+				
+			}
+			
 		     if(nextLine.trim().contains("IMPONIBILE   IVA")) {
 		          //Hack to check the next line that is empty
 		         if(input.nextLine().trim().isEmpty()) {
-		       	
-		           System.out.println(input.nextLine());
+		        	 
+		             System.out.println(input.nextLine());
 		  
-		        }
+		         }
 
 		     }
 		      
 		     if(nextLine.contains("MOD.PAG.")) {
 		        
-		        	System.out.println(nextLine);
+		          System.out.println(nextLine);
 		          foot.setBankId(nextLine);
 		          System.out.println(input.nextLine());
 		          foot.setMethodOfPayment(nextLine);
 		        
-		        }
-	
+		     }
+		     
 		}
 		
 	}
