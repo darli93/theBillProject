@@ -9,6 +9,8 @@ public class Body {
 	private String billDueDate = new String();
 	private String billSecondId = new String();
 	private ArrayList<TableData> list = new ArrayList<TableData>();
+	private double taxableIncome;
+	private double vatRate;
 	
 	public String getBillFirstId() {
 		
@@ -69,5 +71,25 @@ public class Body {
 		this.list = list;
 	
 	}
+	
+	public double getTaxableIncome() {
+		return taxableIncome;
+	}
+
+
+	public void setTaxableIncome(double taxableIncome) {
+		this.taxableIncome = taxableIncome;
+	}
+
+
+	public double getVatRate() {
+		return vatRate;
+	}
+
+
+	public void setVatRate(double vatRate) {
+		this.vatRate = vatRate;
+	}
+
 
 }
