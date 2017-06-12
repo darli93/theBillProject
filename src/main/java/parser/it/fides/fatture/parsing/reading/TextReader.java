@@ -21,9 +21,9 @@ static TableData tabella = new TableData();
 private static Scanner input;
 
 public static void main(String[] args) throws FileNotFoundException {
-	//System.out.println("bello");
+	
 	read();
-		
+	
 }
 	
 	public static void read() throws FileNotFoundException {
@@ -74,7 +74,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			iHead++;
 			
 			} 
-			//System.out.println(firstBodyPart);
+			
 			if(readyToReadBody) {
 				
 				switch (firstBodyPart) {
@@ -113,7 +113,7 @@ public static void main(String[] args) throws FileNotFoundException {
 					readyToReadBody = false;
 					
 				default:
-					break;
+				break;
 					
 				}
 				
@@ -121,20 +121,18 @@ public static void main(String[] args) throws FileNotFoundException {
 
 			}
 			
-			
 			if(lineNumber > 19 ){
 				
 				String qta = nextLine.substring(0, 8).trim();
 				if(qta.contains(",")){
 					
-					qta.replace(',', '.');
+					String newQta = qta.replace(",", ".");
 					System.out.println(qta.indexOf(','));
+					newQta = newQta.trim();
+					double quantita = Double.parseDouble(newQta);
+					System.out.println("QTA: " + quantita);
 					
 				}
-				//Integer qtaIntero = Integer.valueOf(qta);
-				System.out.println(qta);
-				
-				
 				
 			}
 			
@@ -142,8 +140,17 @@ public static void main(String[] args) throws FileNotFoundException {
 		          //Hack to check the next line that is empty
 		         if(input.nextLine().trim().isEmpty()) {
 		        	 
-		             System.out.println(input.nextLine());
-		  
+		        	 //Imponibile
+		        	 String taxableIncomeString = input.next();
+		             taxableIncomeString = taxableIncomeString.replace(".", "");
+		             taxableIncomeString = taxableIncomeString.replace(",", ".");
+		             Double taxableIncomeDouble = Double.parseDouble(taxableIncomeString);
+		             System.out.println(taxableIncomeDouble);
+		             //%iva
+		             String vatRateString = input.next();
+		             Double vatRateDouble = Double.parseDouble(vatRateString);
+		             System.out.println(vatRateDouble);
+
 		         }
 
 		     }
