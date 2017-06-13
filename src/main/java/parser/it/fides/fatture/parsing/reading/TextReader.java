@@ -26,6 +26,10 @@ public class TextReader {
 	private static ArrayList<TableData> tableList = new ArrayList<TableData>();
 	private static int firstBodyPart = 0;
 	private static Scanner input;
+	
+	public static void main(String[] args) throws FileNotFoundException {
+		read("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
+	}
 
 	public static TheBill read(String filePath) throws FileNotFoundException {
 		
@@ -85,6 +89,7 @@ public class TextReader {
 		
 			}
 	
+		//indice
 		indice++;
 		
 		}
