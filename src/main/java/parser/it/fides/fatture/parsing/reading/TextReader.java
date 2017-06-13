@@ -2,44 +2,48 @@ package it.fides.fatture.parsing.reading;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.fides.fatture.parsing.datacontainers.Header;
 import it.fides.fatture.parsing.datacontainers.TableData;
+import it.fides.fatture.parsing.datacontainers.TheBill;
 import it.fides.fatture.parsing.datacontainers.Body;
 import it.fides.fatture.parsing.datacontainers.Footer;
 
 public class TextReader {
-	
-static Header head = new Header();	
-static Body corpo = new Body();
-static Footer foot = new Footer();
-static TableData tabella = new TableData();
 
 private static Scanner input;
+public static String nextLine = input.nextLine();
 
 public static void main(String[] args) throws FileNotFoundException {
 	
-	read();
+	read("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
 	
 }
 	
-	public static void read() throws FileNotFoundException {
+	public static TheBill read(String filePath) throws FileNotFoundException {
 		
-		File file = new File("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
+		TheBill fattura = new TheBill();
+		Header head = new Header();	
+		Body corpo = new Body();
+		Footer foot = new Footer();
+	    TableData tabella = new TableData();
+		ArrayList<TableData> tableList = new ArrayList<TableData>();
+		File file = new File(filePath);//("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
 		input = new Scanner(file);
 		int iHead = 0;
 		Boolean readyToReadBody = false;
 		int firstBodyPart = 0;
-		Boolean readyToReadTheTable = false;
+		Boolean readyToReadTheTable = true;
 		int lineNumber = 0;
 		
 		while(input.hasNext()) {
-			System.out.println(lineNumber);
+			//System.out.println(lineNumber);
 			lineNumber++;
-			String nextLine = input.nextLine();
+			
 			//inizio della lettura e del reporting del head
 			if(iHead < 9) {
 				
@@ -65,10 +69,9 @@ public static void main(String[] args) throws FileNotFoundException {
 					head.setFifthLine(nextLine);
 					System.out.println(nextLine);
 					readyToReadBody = true;
-	
+					//fattura.setHead(head);
 				default:
 				break;
-				
 				}
 			
 			iHead++;
@@ -121,16 +124,33 @@ public static void main(String[] args) throws FileNotFoundException {
 
 			}
 			
-			if(lineNumber > 19 ){
-				
+			if(lineNumber > 19 && readyToReadTheTable == true){
+
 				String qta = nextLine.substring(0, 8).trim();
-				if(qta.contains(",")){
+				String description = nextLine.substring(8, 41).trim();
+				String prezzo = nextLine.substring(41, 54).trim();
+				String Imponibile = nextLine.substring(66, 80).trim();
+				if(qta.contains(",")) {
 					
 					String newQta = qta.replace(",", ".");
-					System.out.println(qta.indexOf(','));
 					newQta = newQta.trim();
 					double quantita = Double.parseDouble(newQta);
 					System.out.println("QTA: " + quantita);
+					tabella.setQuantita((int)quantita);
+					System.out.println("Descrizione: " + description);
+					tabella.setDescrizione(description);
+					String newPrice = prezzo.replace(".", "");
+					newPrice = prezzo.replace(',', '.');
+					newPrice = newPrice.trim();
+					double finalPrice = Double.parseDouble(newPrice);
+					tabella.setPrice(finalPrice);
+					System.out.println("Prezzo: " + finalPrice);
+					String paid = Imponibile.replace(".", "");
+					paid = paid.replace(',', '.');
+					paid = paid.trim();
+					double finalPay = Double.parseDouble(paid);
+					System.out.println("Imponibile: " + finalPay);
+					tabella.setImponibile(finalPay);
 					
 				}
 				
@@ -138,7 +158,8 @@ public static void main(String[] args) throws FileNotFoundException {
 			
 		     if(nextLine.trim().contains("IMPONIBILE   IVA")) {
 		          //Hack to check the next line that is empty
-		         if(input.nextLine().trim().isEmpty()) {
+		        
+		    	 readyToReadTheTable = false;
 		        	 
 		        	 //Imponibile
 		        	 String taxableIncomeString = input.next();
@@ -150,9 +171,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		             String vatRateString = input.next();
 		             Double vatRateDouble = Double.parseDouble(vatRateString);
 		             System.out.println(vatRateDouble);
-
-		         }
-
+		             
 		     }
 		      
 		     if(nextLine.contains("MOD.PAG.")) {
@@ -166,6 +185,8 @@ public static void main(String[] args) throws FileNotFoundException {
 		     
 		}
 		
+		return fattura;
+
 	}
 	
 }

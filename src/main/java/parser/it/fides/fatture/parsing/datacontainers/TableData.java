@@ -4,7 +4,7 @@ public class TableData {
 	
 	private int quantita;
 	private String descrizione = new String();
-	private float price;
+	private double price;
 	private String sc = new String();
 	int iva = 22;
 	private double imponibile;
@@ -33,13 +33,13 @@ public class TableData {
 	
 	}
 	
-	public float getPrice() {
+	public double getPrice() {
 	
 		return price;
 	
 	}
 	
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 	
 		this.price = price;
 	
