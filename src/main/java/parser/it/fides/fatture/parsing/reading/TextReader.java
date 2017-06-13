@@ -14,9 +14,12 @@ import it.fides.fatture.parsing.datacontainers.Body;
 import it.fides.fatture.parsing.datacontainers.Footer;
 
 public class TextReader {
-
-private static Scanner input;
-public static String nextLine = input.nextLine();
+	static TheBill fattura = new TheBill();
+	static Header head = new Header();	
+	static Body corpo = new Body();
+	static Footer foot = new Footer();
+	static TableData tabella = new TableData();
+	private static Scanner input;
 
 public static void main(String[] args) throws FileNotFoundException {
 	
@@ -26,11 +29,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	public static TheBill read(String filePath) throws FileNotFoundException {
 		
-		TheBill fattura = new TheBill();
-		Header head = new Header();	
-		Body corpo = new Body();
-		Footer foot = new Footer();
-	    TableData tabella = new TableData();
+		
 		ArrayList<TableData> tableList = new ArrayList<TableData>();
 		File file = new File(filePath);//("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
 		input = new Scanner(file);
@@ -43,7 +42,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		while(input.hasNext()) {
 			//System.out.println(lineNumber);
 			lineNumber++;
-			
+			String nextLine = input.nextLine();
 			//inizio della lettura e del reporting del head
 			if(iHead < 9) {
 				
@@ -72,6 +71,7 @@ public static void main(String[] args) throws FileNotFoundException {
 					//fattura.setHead(head);
 				default:
 				break;
+				
 				}
 			
 			iHead++;
@@ -187,6 +187,15 @@ public static void main(String[] args) throws FileNotFoundException {
 		
 		return fattura;
 
+	}
+	
+	private Header Head(String testa) {
+		
+		head.setFirstLine(testa);
+		head.setSecondLine(testa);
+		
+		return fattura.getHead();
+		
 	}
 	
 }
