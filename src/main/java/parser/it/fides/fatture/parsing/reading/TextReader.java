@@ -27,12 +27,6 @@ public class TextReader {
 	private static int firstBodyPart = 0;
 	private static Scanner input;
 
-public static void main(String[] args) throws FileNotFoundException {
-	
-	read("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
-	
-}
-	
 	public static TheBill read(String filePath) throws FileNotFoundException {
 		
 		File file = new File(filePath);//("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
@@ -185,20 +179,18 @@ public static void main(String[] args) throws FileNotFoundException {
 	}
 	
 	public static void LastBodyPart(String nextLine) {
-		
-		//Imponibile
+
 		if(nextLine.trim().contains("IMPONIBILE   IVA")) {
 	         
-	     readyToReadTheTable = false;
-		 String taxableIncomeString = input.next();
-         taxableIncomeString = taxableIncomeString.replace(".", "");
-         taxableIncomeString = taxableIncomeString.replace(",", ".");
-         Double taxableIncomeDouble = Double.parseDouble(taxableIncomeString);
-         System.out.println(taxableIncomeDouble);
-         //%iva
-         String vatRateString = input.next();
-         Double vatRateDouble = Double.parseDouble(vatRateString);
-         System.out.println(vatRateDouble);
+			readyToReadTheTable = false;
+			String taxableIncomeString = input.next();
+			taxableIncomeString = taxableIncomeString.replace(".", "");
+			taxableIncomeString = taxableIncomeString.replace(",", ".");
+			Double taxableIncomeDouble = Double.parseDouble(taxableIncomeString);
+			System.out.println(taxableIncomeDouble);
+			String vatRateString = input.next();
+			Double vatRateDouble = Double.parseDouble(vatRateString);
+			System.out.println(vatRateDouble);
 		
 		}
 	
