@@ -29,6 +29,7 @@ public class TextReader {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		read("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
+		//fuuuuuuuuuuuccccckk!!!
 	}
 
 	public static TheBill read(String filePath) throws FileNotFoundException {
