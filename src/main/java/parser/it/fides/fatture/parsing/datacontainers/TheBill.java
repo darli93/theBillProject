@@ -1,8 +1,8 @@
 package it.fides.fatture.parsing.datacontainers;
 
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 
-import it.fides.fatture.parsing.reading.TextReader;
+//import it.fides.fatture.parsing.reading.TextReader;
 
 public class TheBill {
 	
