@@ -27,9 +27,7 @@ public class TextReader {
 	private static int firstBodyPart = 0;
 	private static Scanner input;
 	
-//
-
-	public static TheBill read(String filePath) throws FileNotFoundException {
+	public TheBill read(String filePath) throws FileNotFoundException {
 		
 		File file = new File(filePath);//("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
 		input = new Scanner(file);
@@ -38,13 +36,12 @@ public class TextReader {
 			
 			lineNumber++;
 			String nextLine = input.nextLine();
-			
 			HeadPart(nextLine.trim());	
 			FirstBodyPart(nextLine);				
 			tableList.add(TableBodyPart(nextLine));
 		    LastBodyPart(nextLine);
 		    FootPart(nextLine);
-		
+
 		}
 		
 		fattura.setHead(head);
@@ -58,7 +55,7 @@ public class TextReader {
 	public static void HeadPart(String testa) {
 
 		if(indice < 9) {
-		//System.out.println("sono qui "+ indice);
+
 			switch (indice) {
 		
 			case 4:
@@ -83,11 +80,10 @@ public class TextReader {
 				fattura.setHead(head);
 			break;
 			default:
-				break;
+			break;
 		
 			}
-	
-		//indice
+
 		indice++;
 		
 		}
@@ -149,6 +145,7 @@ public class TextReader {
 			String qta = nextLine.substring(0, 8).trim();
 			String description = nextLine.substring(8, 41).trim();
 			String prezzo = nextLine.substring(41, 54).trim();
+			String sc = nextLine.substring(54,60).trim();
 			String Imponibile = nextLine.substring(66, 80).trim();
 			
 			if(qta.contains(",")) {
@@ -169,6 +166,7 @@ public class TextReader {
 				String paid = Imponibile.replace(".", "");
 				paid = paid.replace(',', '.');
 				paid = paid.trim();
+				tabella.setSc(sc);
 				double finalPay = Double.parseDouble(paid);
 				System.out.println("Imponibile: " + finalPay);
 				tabella.setImponibile(finalPay);

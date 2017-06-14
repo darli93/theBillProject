@@ -1,8 +1,7 @@
 package it.fides.fatture.parsing.datacontainers;
 
-//import java.io.FileNotFoundException;
-
-//import it.fides.fatture.parsing.reading.TextReader;
+import java.io.FileNotFoundException;
+import it.fides.fatture.parsing.reading.TextReader;
 
 public class TheBill {
 	
@@ -10,14 +9,13 @@ public class TheBill {
 	private Body corpo;
 	private Footer fine;
 	
-//	public static void main(String[] args) throws FileNotFoundException {
-//		
-//		TextReader.read();
-//		String cinque = head.getFirstLine();
-//		System.out.println(head.getSecondLine());
-//		
-//	}
-	
+	public static void main(String[] args) throws FileNotFoundException {
+		
+		readBill();
+		System.out.println();
+		
+	}
+		
 	public TheBill() {
 		
 		this.head = new Header();
@@ -67,6 +65,13 @@ public class TheBill {
 	public void setFine(Footer fine) {
 		
 		this.fine = fine;
+	
+	}
+	
+	public static  TheBill readBill() throws FileNotFoundException {
+		
+		TextReader reader = new TextReader();
+		return reader.read("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
 	
 	}
 

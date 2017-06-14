@@ -73,23 +73,27 @@ public class Body {
 	}
 	
 	public double getTaxableIncome() {
+		
 		return taxableIncome;
+	
 	}
-
 
 	public void setTaxableIncome(double taxableIncome) {
+	
 		this.taxableIncome = taxableIncome;
+	
 	}
-
 
 	public double getVatRate() {
+	
 		return vatRate;
+	
 	}
-
 
 	public void setVatRate(double vatRate) {
+	
 		this.vatRate = vatRate;
+	
 	}
-
 
 }
