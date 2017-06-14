@@ -44,6 +44,7 @@ public class TextReader {
 
 		}
 		
+		corpo.setList(tableList);
 		fattura.setHead(head);
 		fattura.setCorpo(corpo);
 		fattura.setFine(foot);
@@ -60,23 +61,23 @@ public class TextReader {
 		
 			case 4:
 				head.setFirstLine(testa);
-				System.out.println(testa);
+				//system.out.println(testa);
 			break;
 			case 5:
 				head.setSecondLine(testa);
-				System.out.println(testa);
+				//system.out.println(testa);
 			break;
 			case 6:
 				head.setThirdLine(testa);
-				System.out.println(testa);
+				//system.out.println(testa);
 			break;
 			case 7:
 				head.setForthLine(testa);
-				System.out.println(testa);
+				//system.out.println(testa);
 			break;
 			case 8:
 				head.setFifthLine(testa);
-				System.out.println(testa);
+				//system.out.println(testa);
 				fattura.setHead(head);
 			break;
 			default:
@@ -105,9 +106,9 @@ public class TextReader {
 			    	
 					String first = nextLine.substring(12, match.start());
 					String second = nextLine.substring(match.start() + 3);    
-					System.out.println(first.trim());
+					//system.out.println(first.trim());
 					corpo.setBillFirstId(first);
-					System.out.println(second.trim());
+					//system.out.println(second.trim());
 					corpo.setBillDateOfIssue(second);
 				        
 				}
@@ -117,14 +118,14 @@ public class TextReader {
 				
 				String billDueDate = input.nextLine().substring(8);
 				corpo.setBillDueDate(billDueDate.trim());
-				System.out.println(billDueDate.trim());
+				//system.out.println(billDueDate.trim());
 			
 			break;
 			
 			case 5: 
 			
 				corpo.setBillSecondId(nextLine);
-				System.out.println(nextLine);
+				//system.out.println(nextLine);
 				indice++;
 			break;
 			default:
@@ -153,22 +154,22 @@ public class TextReader {
 				String newQta = qta.replace(",", ".");
 				newQta = newQta.trim();
 				double quantita = Double.parseDouble(newQta);
-				System.out.println("QTA: " + quantita);
+				//system.out.println("QTA: " + quantita);
 				tabella.setQuantita((int)quantita);
-				System.out.println("Descrizione: " + description);
+				//system.out.println("Descrizione: " + description);
 				tabella.setDescrizione(description);
 				String newPrice = prezzo.replace(".", "");
 				newPrice = prezzo.replace(',', '.');
 				newPrice = newPrice.trim();
 				double finalPrice = Double.parseDouble(newPrice);
 				tabella.setPrice(finalPrice);
-				System.out.println("Prezzo: " + finalPrice);
+				//system.out.println("Prezzo: " + finalPrice);
 				String paid = Imponibile.replace(".", "");
 				paid = paid.replace(',', '.');
 				paid = paid.trim();
 				tabella.setSc(sc);
 				double finalPay = Double.parseDouble(paid);
-				System.out.println("Imponibile: " + finalPay);
+				//system.out.println("Imponibile: " + finalPay);
 				tabella.setImponibile(finalPay);
 		
 			}		
@@ -188,10 +189,12 @@ public class TextReader {
 			taxableIncomeString = taxableIncomeString.replace(".", "");
 			taxableIncomeString = taxableIncomeString.replace(",", ".");
 			Double taxableIncomeDouble = Double.parseDouble(taxableIncomeString);
-			System.out.println(taxableIncomeDouble);
+			corpo.setTaxableIncome(taxableIncomeDouble);
+			//system.out.println(taxableIncomeDouble);
 			String vatRateString = input.next();
 			Double vatRateDouble = Double.parseDouble(vatRateString);
-			System.out.println(vatRateDouble);
+			corpo.setVatRate(vatRateDouble);
+			//system.out.println(vatRateDouble);
 		
 		}
 	
@@ -201,9 +204,9 @@ public class TextReader {
 		
 		if(nextLine.contains("MOD.PAG.")) {
 	        
-		   System.out.println(nextLine);
+		   //system.out.println(nextLine);
 	       foot.setBankId(nextLine);
-	       System.out.println(input.nextLine());
+	       //system.out.println(input.nextLine());
 	       foot.setMethodOfPayment(nextLine);
 		
 		}

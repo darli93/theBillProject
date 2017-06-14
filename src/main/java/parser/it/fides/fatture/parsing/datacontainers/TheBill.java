@@ -8,13 +8,6 @@ public class TheBill {
 	private Header head;
 	private Body corpo;
 	private Footer fine;
-	
-	public static void main(String[] args) throws FileNotFoundException {
-		
-		readBill();
-		System.out.println();
-		
-	}
 		
 	public TheBill() {
 		
@@ -68,7 +61,7 @@ public class TheBill {
 	
 	}
 	
-	public static  TheBill readBill() throws FileNotFoundException {
+	public static TheBill readBill() throws FileNotFoundException {
 		
 		TextReader reader = new TextReader();
 		return reader.read("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
