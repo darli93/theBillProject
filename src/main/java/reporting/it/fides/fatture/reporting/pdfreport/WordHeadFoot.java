@@ -15,6 +15,22 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 public class WordHeadFoot {
 	
 	private static XWPFDocument document = new XWPFDocument(); 
+	public static XWPFDocument getDocument() {
+		return document;
+	}
+
+	public static void setDocument(XWPFDocument document) {
+		WordHeadFoot.document = document;
+	}
+
+	public static XWPFHeaderFooterPolicy getHeaderFooterPolicy() {
+		return headerFooterPolicy;
+	}
+
+	public static void setHeaderFooterPolicy(XWPFHeaderFooterPolicy headerFooterPolicy) {
+		WordHeadFoot.headerFooterPolicy = headerFooterPolicy;
+	}
+
 	private static XWPFHeaderFooterPolicy headerFooterPolicy = document.createHeaderFooterPolicy();
 
 	public static void main(String[] args) throws InvalidFormatException, FileNotFoundException, IOException {
