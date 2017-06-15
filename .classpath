@@ -4,10 +4,11 @@
 	<classpathentry kind="src" path="src/main/java/reporting"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/poi-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-3.11-20141221.jar"/>
-	<classpathentry kind="lib" path="lib/poi-scratchpad-3.11-20141221.jar"/>
+	<classpathentry kind="lib" path="lib/POI3.16/poi-3.16.jar"/>
+	<classpathentry kind="lib" path="lib/POI3.16/poi-excelant-3.16.jar"/>
+	<classpathentry kind="lib" path="lib/POI3.16/poi-ooxml-3.16.jar"/>
+	<classpathentry kind="lib" path="lib/POI3.16/poi-ooxml-schemas-3.16.jar"/>
+	<classpathentry kind="lib" path="lib/POI3.16/poi-scratchpad-3.16.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
