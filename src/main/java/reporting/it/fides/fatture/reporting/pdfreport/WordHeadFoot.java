@@ -19,7 +19,7 @@ public class WordHeadFoot {
 
 	public static void main(String[] args) throws InvalidFormatException, FileNotFoundException, IOException {
 		
-		//XWPFHeader header = WordHeader();
+		XWPFHeader header = WordHeader();
 		XWPFFooter footer = WordFooter();
 		
 		FileOutputStream out = new FileOutputStream(new File("CreateDoc.docx"));
@@ -51,87 +51,88 @@ public class WordHeadFoot {
 	    
 	    XWPFTable tableFooter = footer.createTable(1, 3);
 	      //set cell width
-	      CTTblWidth width = tableFooter.getCTTbl().addNewTblPr().addNewTblW();
-	      width.setType(STTblWidth.DXA);
-	      width.setW(BigInteger.valueOf(10000));
+	    CTTblWidth width = tableFooter.getCTTbl().addNewTblPr().addNewTblW();
+	    width.setType(STTblWidth.DXA);
+	    width.setW(BigInteger.valueOf(10000));
 	      //bordless table
-	      tableFooter.getCTTbl().getTblPr().unsetTblBorders();
+	    tableFooter.getCTTbl().getTblPr().unsetTblBorders();
+	    tableFooter.setStyleID("MyStyle");
 	      
-	      String[] prima = {"Fides Consulting S.r.l", "Via Motta Casa dei Miri, 21", "Gragnano (Na) - 80054", "C.F. e P.IVA 05131731217", "Cap. Sociale 90.000,00", "Rea Napoli 735203"};
-	      String[] seconda  = {"Sede Amministrativa", "Centro Direzionale Is. E7" , "80143 - Napoli (Italy)", "Phone +39 081 195 02 985 ", "Fax +39 081 195 02 948 ", "www.fides.it | info@fides.it"};
-	      String[] terza = {"Unit� Locale", "Viale Monza, 1", "20125 - Milano", "Phone +39 02 49 76 39 67", "Fax +39 02 49 76 39 85"};
+	    String[] prima = {"Fides Consulting S.r.l", "Via Motta Casa dei Miri, 21", "Gragnano (Na) - 80054", "C.F. e P.IVA 05131731217", "Cap. Sociale 90.000,00", "Rea Napoli 735203"};				
+	    String[] seconda  = {"Sede Amministrativa", "Centro Direzionale Is. E7" , "80143 - Napoli (Italy)", "Phone +39 081 195 02 985 ", "Fax +39 081 195 02 948 ", "www.fides.it | info@fides.it"};
+	    String[] terza = {"Unit� Locale", "Viale Monza, 1", "20125 - Milano", "Phone +39 02 49 76 39 67", "Fax +39 02 49 76 39 85"};
 		
-	      XWPFTableRow tableFooterRowOne = tableFooter.getRow(0);
-	      XWPFParagraph firstCellHeader = tableFooterRowOne.getCell(0).addParagraph();
-	      firstCellHeader.setSpacingAfter(0);
-	      XWPFRun firstCellParHeader = firstCellHeader.createRun();
-	      XWPFParagraph firstCellBody = tableFooterRowOne.getCell(0).addParagraph();
-	      XWPFRun firstCellParBody = firstCellBody.createRun();
+	    XWPFTableRow tableFooterRowOne = tableFooter.getRow(0);
+	    XWPFParagraph firstCellHeader = tableFooterRowOne.getCell(0).addParagraph();
+	    firstCellHeader.setSpacingAfter(0);
+	    XWPFRun firstCellParHeader = firstCellHeader.createRun();
+	    XWPFParagraph firstCellBody = tableFooterRowOne.getCell(0).addParagraph();
+	    XWPFRun firstCellParBody = firstCellBody.createRun();
 	      
-	      firstCellParHeader.setColor("1874CD");
-    	  firstCellParHeader.setText(prima[0]);
-    	  firstCellParHeader.setFontFamily("Open Sans");
-    	  firstCellParHeader.setFontSize(9);
-    	  firstCellParBody.setFontFamily("Open Sans");
-    	  firstCellParBody.setFontSize(8);
+	    firstCellParHeader.setColor("1874CD");
+	    firstCellParHeader.setText(prima[0]);
+	    firstCellParHeader.setFontFamily("Open Sans");
+	    firstCellParHeader.setFontSize(9);
+	    firstCellParBody.setFontFamily("Open Sans");
+	    firstCellParBody.setFontSize(8);
     	  
-	      for(int i = 1; i < prima.length; i++) {
+	    for(int i = 1; i < prima.length; i++) {
 	    	  
-	    	  firstCellParBody.setColor("000000");
-	    	  firstCellParBody.setText(prima[i]);
-	    	  firstCellParBody.addBreak();  
+	   	  firstCellParBody.setColor("000000");
+	   	  firstCellParBody.setText(prima[i]);
+    	  firstCellParBody.addBreak();  
 	    
-	      }
+	    }
 	      
-	      XWPFParagraph SecondCellHeader = tableFooterRowOne.getCell(1).addParagraph();
-	      SecondCellHeader.setSpacingAfter(0);
-	      XWPFRun SecondCellParHeader = SecondCellHeader.createRun();
-	      XWPFParagraph SecondCellBody = tableFooterRowOne.getCell(1).addParagraph();
-	      XWPFRun SecondCellParBody = SecondCellBody.createRun();
+	    XWPFParagraph SecondCellHeader = tableFooterRowOne.getCell(1).addParagraph();
+	    SecondCellHeader.setSpacingAfter(0);
+	    XWPFRun SecondCellParHeader = SecondCellHeader.createRun();
+	    XWPFParagraph SecondCellBody = tableFooterRowOne.getCell(1).addParagraph();
+	    XWPFRun SecondCellParBody = SecondCellBody.createRun();
 	      
-	      SecondCellParHeader.setColor("1874CD");
-	      SecondCellParHeader.setText(seconda[0]);
-	      SecondCellParHeader.setFontFamily("Open Sans");
-	      SecondCellParHeader.setFontSize(9);
-    	  SecondCellParBody.setColor("000000");
-    	  SecondCellParBody.setFontFamily("Open Sans");
-    	  SecondCellParBody.setFontSize(8);
-    	  
-	      for(int i = 1; i < seconda.length; i++) {
+	    SecondCellParHeader.setColor("1874CD");
+	    SecondCellParHeader.setText(seconda[0]);
+	    SecondCellParHeader.setFontFamily("Open Sans");
+	    SecondCellParHeader.setFontSize(9);
+	    SecondCellParBody.setColor("000000");
+	    SecondCellParBody.setFontFamily("Open Sans");
+	    SecondCellParBody.setFontSize(8);
+      
+	    for(int i = 1; i < seconda.length; i++) {
 	    	  
-	    	  SecondCellParBody.setText(seconda[i]); 
-	    	  SecondCellParBody.addBreak();
+	    	SecondCellParBody.setText(seconda[i]); 
+	   	  	SecondCellParBody.addBreak();
 	     
-	      }
+	    }
 	      
-	      XWPFParagraph ThirdCellHeader = tableFooterRowOne.getCell(2).addParagraph();
-	      ThirdCellHeader.setSpacingAfter(0);
-	      XWPFRun ThirdCellParHeader = ThirdCellHeader.createRun();
-	      XWPFParagraph ThirdCellBody = tableFooterRowOne.getCell(2).addParagraph();
-	      XWPFRun ThirdCellParBody = ThirdCellBody.createRun();
+	    XWPFParagraph ThirdCellHeader = tableFooterRowOne.getCell(2).addParagraph();
+	    ThirdCellHeader.setSpacingAfter(0);
+	    XWPFRun ThirdCellParHeader = ThirdCellHeader.createRun();
+	    XWPFParagraph ThirdCellBody = tableFooterRowOne.getCell(2).addParagraph();
+	    XWPFRun ThirdCellParBody = ThirdCellBody.createRun();
 	      
-	      ThirdCellParHeader.setColor("1874CD");
-	      ThirdCellParHeader.setText(terza[0]);
-	      ThirdCellParHeader.setFontFamily("Arial");
-	      ThirdCellParHeader.setFontSize(9);
+	    ThirdCellParHeader.setColor("1874CD");
+	    ThirdCellParHeader.setText(terza[0]);
+	    ThirdCellParHeader.setFontFamily("Arial");
+	    ThirdCellParHeader.setFontSize(9);
 	      
-    	  ThirdCellParBody.setColor("000000");
-    	  ThirdCellParBody.setFontFamily("Open Sans");
-	      ThirdCellParBody.setFontSize(8);
+	    ThirdCellParBody.setColor("000000");
+	    ThirdCellParBody.setFontFamily("Open Sans");
+	    ThirdCellParBody.setFontSize(8);
 	      
-	      for(int i = 1; i < terza.length; i++) {
+	    for(int i = 1; i < terza.length; i++) {
 	    	  
-	    	  ThirdCellParBody.setText(terza[i]);
-	    	  ThirdCellParBody.addBreak();
+	    	ThirdCellParBody.setText(terza[i]);
+	    	ThirdCellParBody.addBreak();
 	     
-	      }
+	    }
 	      
 	      //add image
-	      XWPFParagraph addNewTableCellPar = tableFooter.getRow(0).addNewTableCell().addParagraph();
-	      XWPFRun addNewCellRun = addNewTableCellPar.createRun();
+	    XWPFParagraph addNewTableCellPar = tableFooter.getRow(0).addNewTableCell().addParagraph();
+	    XWPFRun addNewCellRun = addNewTableCellPar.createRun();
 
-	      addNewCellRun.addPicture(new FileInputStream("src/images/accredia.jpg"), XWPFDocument.PICTURE_TYPE_JPEG, "Accredia", Units.toEMU(61), Units.toEMU(78));
-	      addNewCellRun.addPicture(new FileInputStream("src/images/kiwa.jpg"), XWPFDocument.PICTURE_TYPE_JPEG, "kiwa", Units.toEMU(61), Units.toEMU(96));
+	    addNewCellRun.addPicture(new FileInputStream("src/images/accredia.jpg"), XWPFDocument.PICTURE_TYPE_JPEG, "Accredia", Units.toEMU(61), Units.toEMU(78));
+	    addNewCellRun.addPicture(new FileInputStream("src/images/kiwa.jpg"), XWPFDocument.PICTURE_TYPE_JPEG, "kiwa", Units.toEMU(61), Units.toEMU(96));
 	      
 		return footer;
 		
