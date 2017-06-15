@@ -55,13 +55,14 @@ public class WordHeadFoot {
 		      //bordless table
 		      tableFooter.getCTTbl().getTblPr().unsetTblBorders();
 		      
-		      String[] prima = {"Fides Consulting S.r.l\n", "Via Motta Casa dei Miri, 21\nGragnano (Na) - 80054\nC.F. e P.IVA 05131731217 \nCap. Sociale 90.000,00\nRea Napoli 735203"};
-		      String[] seconda  = {"Sede Amministrativa\n", "Centro Direzionale Is. E7" , "80143 - Napoli (Italy)", "Phone +39 081 195 02 985 ", "Fax +39 081 195 02 948 ", "www.fides.it | info@fides.it"};
-		      String[] terza = {"Unit√† Locale\n", "Viale Monza, 1", "20125 - Milano", "Phone +39 02 49 76 39 67", "Fax +39 02 49 76 39 85"};
+		      String[] prima = {"Fides Consulting S.r.l", "Via Motta Casa dei Miri, 21", "Gragnano (Na) - 80054", "C.F. e P.IVA 05131731217", "Cap. Sociale 90.000,00", "Rea Napoli 735203"};
+		      String[] seconda  = {"Sede Amministrativa", "Centro Direzionale Is. E7" , "80143 - Napoli (Italy)", "Phone +39 081 195 02 985 ", "Fax +39 081 195 02 948 ", "www.fides.it | info@fides.it"};
+		      String[] terza = {"Unit‡† Locale", "Viale Monza, 1", "20125 - Milano", "Phone +39 02 49 76 39 67", "Fax +39 02 49 76 39 85"};
 		      
 		      //create first row
 		      XWPFTableRow tableFooterRowOne = tableFooter.getRow(0);
 		      XWPFRun firstCellParHeader = tableFooterRowOne.getCell(0).addParagraph().createRun();
+		      firstCellParHeader.removeBreak();
 		      XWPFRun firstCellParBody = tableFooterRowOne.getCell(0).addParagraph().createRun();
 
 		      firstCellParHeader.setColor("1874CD");
@@ -90,6 +91,7 @@ public class WordHeadFoot {
 	    	  
 		      for(int i = 1; i < seconda.length; i++) {
 		    	  SecondCellParBody.setText(seconda[i]); 
+		    	  SecondCellParBody.addBreak();
 		      }
 		      
 		      XWPFRun ThirdCellParHeader = tableFooterRowOne.getCell(2).addParagraph().createRun();
@@ -113,7 +115,7 @@ public class WordHeadFoot {
 		      String imgAccredia= "src/images/accredia.jpg";
 		      XWPFPicture accrediaCell = addNewCell.addPicture(new FileInputStream(imgAccredia), XWPFDocument.PICTURE_TYPE_JPEG, imgAccredia, Units.toEMU(61), Units.toEMU(78));
 		      String imgKiwa= "src/images/kiwa.jpg";
-		      XWPFPicture kiwaCell = addNewCell.addPicture(new FileInputStream(imgKiwa), XWPFDocument.PICTURE_TYPE_JPEG, imgAccredia, Units.toEMU(30), Units.toEMU(60));
+		      XWPFPicture kiwaCell = addNewCell.addPicture(new FileInputStream(imgKiwa), XWPFDocument.PICTURE_TYPE_JPEG, imgAccredia, Units.toEMU(61), Units.toEMU(96));
 
 		      
 		      //Write the Document in file system
