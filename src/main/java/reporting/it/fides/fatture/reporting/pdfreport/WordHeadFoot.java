@@ -61,10 +61,12 @@ public class WordHeadFoot {
 		      
 		      //create first row
 		      XWPFTableRow tableFooterRowOne = tableFooter.getRow(0);
-		      XWPFRun firstCellParHeader = tableFooterRowOne.getCell(0).addParagraph().createRun();
-		      firstCellParHeader.removeBreak();
-		      XWPFRun firstCellParBody = tableFooterRowOne.getCell(0).addParagraph().createRun();
-
+		      XWPFParagraph firstCellHeader = tableFooterRowOne.getCell(0).addParagraph();
+		      firstCellHeader.setSpacingAfter(0);
+		      XWPFRun firstCellParHeader = firstCellHeader.createRun();
+		      XWPFParagraph firstCellBody = tableFooterRowOne.getCell(0).addParagraph();
+		      XWPFRun firstCellParBody = firstCellBody.createRun();
+		      
 		      firstCellParHeader.setColor("1874CD");
 	    	  firstCellParHeader.setText(prima[0]);
 	    	  firstCellParHeader.setFontFamily("Open Sans");
@@ -78,8 +80,11 @@ public class WordHeadFoot {
 		    	  firstCellParBody.addBreak();  
 		      }
 		      
-		      XWPFRun SecondCellParHeader = tableFooterRowOne.getCell(1).addParagraph().createRun();
-		      XWPFRun SecondCellParBody = tableFooterRowOne.getCell(1).addParagraph().createRun();
+		      XWPFParagraph SecondCellHeader = tableFooterRowOne.getCell(1).addParagraph();
+		      SecondCellHeader.setSpacingAfter(0);
+		      XWPFRun SecondCellParHeader = SecondCellHeader.createRun();
+		      XWPFParagraph SecondCellBody = tableFooterRowOne.getCell(1).addParagraph();
+		      XWPFRun SecondCellParBody = SecondCellBody.createRun();
 		      
 		      SecondCellParHeader.setColor("1874CD");
 		      SecondCellParHeader.setText(seconda[0]);
@@ -94,8 +99,11 @@ public class WordHeadFoot {
 		    	  SecondCellParBody.addBreak();
 		      }
 		      
-		      XWPFRun ThirdCellParHeader = tableFooterRowOne.getCell(2).addParagraph().createRun();
-		      XWPFRun ThirdCellParBody = tableFooterRowOne.getCell(2).addParagraph().createRun();
+		      XWPFParagraph ThirdCellHeader = tableFooterRowOne.getCell(2).addParagraph();
+		      ThirdCellHeader.setSpacingAfter(0);
+		      XWPFRun ThirdCellParHeader = ThirdCellHeader.createRun();
+		      XWPFParagraph ThirdCellBody = tableFooterRowOne.getCell(2).addParagraph();
+		      XWPFRun ThirdCellParBody = ThirdCellBody.createRun();
 		      
 		      ThirdCellParHeader.setColor("1874CD");
 		      ThirdCellParHeader.setText(terza[0]);
@@ -111,13 +119,13 @@ public class WordHeadFoot {
 		      }
 		      
 		      //add image
-		      XWPFRun addNewCell = tableFooter.getRow(0).addNewTableCell().addParagraph().createRun();
+		      XWPFParagraph addNewTableCellPar = tableFooter.getRow(0).addNewTableCell().addParagraph();
+		      XWPFRun addNewCellRun = addNewTableCellPar.createRun();
 		      String imgAccredia= "src/images/accredia.jpg";
-		      XWPFPicture accrediaCell = addNewCell.addPicture(new FileInputStream(imgAccredia), XWPFDocument.PICTURE_TYPE_JPEG, imgAccredia, Units.toEMU(61), Units.toEMU(78));
+		      XWPFPicture accrediaCell = addNewCellRun.addPicture(new FileInputStream(imgAccredia), XWPFDocument.PICTURE_TYPE_JPEG, imgAccredia, Units.toEMU(61), Units.toEMU(78));
 		      String imgKiwa= "src/images/kiwa.jpg";
-		      XWPFPicture kiwaCell = addNewCell.addPicture(new FileInputStream(imgKiwa), XWPFDocument.PICTURE_TYPE_JPEG, imgAccredia, Units.toEMU(61), Units.toEMU(96));
+		      XWPFPicture kiwaCell = addNewCellRun.addPicture(new FileInputStream(imgKiwa), XWPFDocument.PICTURE_TYPE_JPEG, imgAccredia, Units.toEMU(61), Units.toEMU(96));
 
-		      
 		      //Write the Document in file system
 		      FileOutputStream out = new FileOutputStream(new File("CreateDoc.docx"));
 		      document.write(out);
