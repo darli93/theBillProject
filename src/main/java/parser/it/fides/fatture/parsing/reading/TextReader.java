@@ -19,13 +19,71 @@ public class TextReader {
 	static Header head = new Header();	
 	static Body corpo = new Body();
 	static Footer foot = new Footer();
-	static TableData tabella = new TableData();
-	private static int indice = 0;
+	static int indice = 0;
 	private static int lineNumber = 0;
 	private static Boolean readyToReadTheTable = true;
 	private static ArrayList<TableData> tableList = new ArrayList<TableData>();
 	private static int firstBodyPart = 0;
 	private static Scanner input;
+	
+//	public static void main(String[] args) throws FileNotFoundException {
+//		File file = new File("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");//("src/main/java/parser/it/fides/fatture/parsing/reading/20170193.dat");
+//		input = new Scanner(file);
+//		
+//		while(input.hasNext()) {
+//			
+//			lineNumber++;
+//			String nextLine = input.nextLine();
+//			HeadPart(nextLine.trim());	
+//			FirstBodyPart(nextLine);
+//			if(lineNumber > 19 && readyToReadTheTable == true){
+//				String qta = nextLine.substring(0, 8).trim();
+//				String description = nextLine.substring(8, 41).trim();
+//				String prezzo = nextLine.substring(41, 54).trim();
+//				String sc = nextLine.substring(54,60).trim();
+//				String Imponibile = nextLine.substring(66, 80).trim();
+//				
+//				if(qta.contains(",")) {
+//				
+//					String newQta = qta.replace(",", ".");
+//					newQta = newQta.trim();
+//					double quantita = Double.parseDouble(newQta);
+//					System.out.println("QTA: " + quantita);
+//					tabella.setQuantita((int)quantita);
+//					System.out.println("Descrizione: " + description);
+//					tabella.setDescrizione(description);
+//					String newPrice = prezzo.replace(".", "");
+//					newPrice = prezzo.replace(',', '.');
+//					newPrice = newPrice.trim();
+//					double finalPrice = Double.parseDouble(newPrice);
+//					tabella.setPrice(finalPrice);
+//					System.out.println("Prezzo: " + finalPrice);
+//					String paid = Imponibile.replace(".", "");
+//					paid = paid.replace(',', '.');
+//					paid = paid.trim();
+//					tabella.setSc(sc);
+//					double finalPay = Double.parseDouble(paid);
+//					System.out.println("Imponibile: " + finalPay);
+//					tabella.setImponibile(finalPay);
+//					tableList.add(tabella);
+//			
+//				}
+//			
+//			}
+//			
+//		    LastBodyPart(nextLine);
+//		    FootPart(nextLine);
+//
+//		}
+//		
+//		corpo.setList(tableList);
+//		fattura.setHead(head);
+//		fattura.setCorpo(corpo);
+//		fattura.setFine(foot);
+//		System.out.println(corpo.getList().size());
+//		System.out.println(lineNumber);
+//		
+//	}
 	
 	public TheBill read(String filePath) throws FileNotFoundException {
 		
@@ -38,19 +96,60 @@ public class TextReader {
 			String nextLine = input.nextLine();
 			HeadPart(nextLine.trim());	
 			FirstBodyPart(nextLine);				
-			tableList.add(TableBodyPart(nextLine));
+			if(lineNumber > 19 && readyToReadTheTable == true) {
+				
+				TableData tabella = new TableData();
+				String qta = nextLine.substring(0, 8).trim();
+				String description = nextLine.substring(8, 41).trim();
+				String prezzo = nextLine.substring(41, 54).trim();
+				String sc = nextLine.substring(54,60).trim();
+				String Imponibile = nextLine.substring(66, 80).trim();
+				
+				if(!nextLine.trim().isEmpty() && !nextLine.contains("IMPONIBILE")) {
+					
+					String newQta = qta.replace(",", ".");
+					newQta = newQta.trim();
+					double quantita = Double.parseDouble(newQta);
+//					System.out.println("QTA: " + quantita);
+					tabella.setQuantita((int)quantita);
+//					System.out.println("Descrizione: " + description);
+					tabella.setDescrizione(description);
+					String newPrice = prezzo.replace(".", "");
+					newPrice = prezzo.replace(',', '.');
+					newPrice = newPrice.trim();
+					double finalPrice = Double.parseDouble(newPrice);
+					tabella.setPrice(finalPrice);
+//					System.out.println("Prezzo: " + finalPrice);
+					String paid = Imponibile.replace(".", "");
+					paid = paid.replace(',', '.');
+					paid = paid.trim();
+					tabella.setSc(sc);
+					double finalPay = Double.parseDouble(paid);
+//					System.out.println("Imponibile: " + finalPay);
+					tabella.setImponibile(finalPay); 
+					//System.out.println(tabella.getDescrizione());
+					tableList.add(tabella);
+					
+				}
+				
+			}
+			
 		    LastBodyPart(nextLine);
 		    FootPart(nextLine);
 
 		}
 		
+		//System.out.println(tableList.get(0).getDescrizione());
+		System.out.println(tableList.size());
+		
 		corpo.setList(tableList);
 		fattura.setHead(head);
 		fattura.setCorpo(corpo);
 		fattura.setFine(foot);
+		//System.out.println(corpo.getList().size());
 		
 		return fattura;
-
+		
 	}
 	
 	public static void HeadPart(String testa) {
@@ -138,48 +237,7 @@ public class TextReader {
 		}
 	
 	}
-	
-	public static TableData TableBodyPart(String nextLine) {
 		
-		if(lineNumber > 19 && readyToReadTheTable == true){
-
-			String qta = nextLine.substring(0, 8).trim();
-			String description = nextLine.substring(8, 41).trim();
-			String prezzo = nextLine.substring(41, 54).trim();
-			String sc = nextLine.substring(54,60).trim();
-			String Imponibile = nextLine.substring(66, 80).trim();
-			
-			if(qta.contains(",")) {
-			
-				String newQta = qta.replace(",", ".");
-				newQta = newQta.trim();
-				double quantita = Double.parseDouble(newQta);
-				//system.out.println("QTA: " + quantita);
-				tabella.setQuantita((int)quantita);
-				//system.out.println("Descrizione: " + description);
-				tabella.setDescrizione(description);
-				String newPrice = prezzo.replace(".", "");
-				newPrice = prezzo.replace(',', '.');
-				newPrice = newPrice.trim();
-				double finalPrice = Double.parseDouble(newPrice);
-				tabella.setPrice(finalPrice);
-				//system.out.println("Prezzo: " + finalPrice);
-				String paid = Imponibile.replace(".", "");
-				paid = paid.replace(',', '.');
-				paid = paid.trim();
-				tabella.setSc(sc);
-				double finalPay = Double.parseDouble(paid);
-				//system.out.println("Imponibile: " + finalPay);
-				tabella.setImponibile(finalPay);
-		
-			}		
-		
-		}
-		
-		return tabella;
-		
-	}
-	
 	public static void LastBodyPart(String nextLine) {
 
 		if(nextLine.trim().contains("IMPONIBILE   IVA")) {

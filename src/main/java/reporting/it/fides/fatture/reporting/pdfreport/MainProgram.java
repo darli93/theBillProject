@@ -9,22 +9,21 @@ import it.fides.fatture.parsing.datacontainers.TableData;
 import it.fides.fatture.parsing.datacontainers.TheBill;
 
 public class MainProgram {
-
-	static TheBill fattura = new TheBill();
-	static Header head = new Header();	
-	static Body corpo = new Body();
-	static Footer foot = new Footer();
-	static TableData tabella = new TableData();
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		
+		TheBill fattura = new TheBill();
+		
 		fattura = loadBill();
-		System.out.println(fattura.getCorpo().getList().get(2).getQuantita());
+		//System.out.println(fattura.getCorpo().getList().get(0).getDescrizione());
 	
 	}
 		
 	private static TheBill loadBill() throws FileNotFoundException {
-		
+		TheBill fattura = new TheBill();
+		Header head = new Header();	
+		Body corpo = new Body();
+		Footer foot = new Footer();
 		head = TheBill.readBill().getHead();
 		corpo = TheBill.readBill().getCorpo();
 		foot = TheBill.readBill().getFine();
