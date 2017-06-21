@@ -35,8 +35,8 @@ public class WordHeadFoot {
 
 	public static void main(String[] args) throws InvalidFormatException, FileNotFoundException, IOException {
 		
-		XWPFHeader header = WordHeader();
-		XWPFFooter footer = WordFooter();
+		//XWPFHeader header = WordHeader();
+		//XWPFFooter footer = WordFooter();
 		
 		FileOutputStream out = new FileOutputStream(new File("CreateDoc.docx"));
 	    document.write(out);
@@ -143,7 +143,7 @@ public class WordHeadFoot {
 	     
 	    }
 	      
-	      //add image
+	    //add image
 	    XWPFParagraph addNewTableCellPar = tableFooter.getRow(0).addNewTableCell().addParagraph();
 	    XWPFRun addNewCellRun = addNewTableCellPar.createRun();
 
