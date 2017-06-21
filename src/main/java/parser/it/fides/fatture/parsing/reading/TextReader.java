@@ -266,8 +266,7 @@ public class TextReader {
 	       foot.setBankId(nextLine);
 	       //system.out.println(input.nextLine());
 	       foot.setMethodOfPayment(input.nextLine());
-	       System.out.println(foot.getMethodOfPayment());
-		
+	   
 		}
 	
 	}
